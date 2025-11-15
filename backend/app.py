@@ -145,7 +145,7 @@ def test():
 ## create dimensions
 # Date Dimension
 @app.route('/api/flask/dates', methods=['POST'])
-def create_date_dim():
+def create_dates():
     try:
         data = request.get_json()
 
@@ -193,9 +193,10 @@ def create_date_dim():
         db.session.rollback()
         return jsonify({"error": str(e)}), 500
 
-# get data
+# get all datas
+# Date Dimension
 @app.route('/api/flask/dates', methods=['GET'])
-def get_date_dim():
+def get_dates():
     try:
         dates = DateDimension.query.all()
         dates_data = [d.json() for d in dates]
@@ -208,3 +209,21 @@ def get_date_dim():
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
+# get a data by id
+# Date dimension
+# @app.route('/api/flask/dates/<id>', methods=['GET'])
+# def get_date(id):
+#     try:
+#         date = DateDimension.query.filter_by(tanggal_id=id).first()
+#         if date:
+#             return make_response(jsonify({'date': date.json()}), 200)
+#         return make_response(jsonify({'message': 'user not found'}), 404)
+    
+#     except Exception as e:
+#         return jsonify({"error": str(e)}), 500
+    
+
+# update
+# Date Dimension
+# @app.route('/api/flask/dates/<id>', methods=['GET'])
