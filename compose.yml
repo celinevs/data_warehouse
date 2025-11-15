@@ -1,13 +1,28 @@
 services:
+  # flask service
+  flaskapp:
+    container_name: flaskapp
+    image: flaskapp:1.0.0
+    build:
+      context: ./backend
+      dockerfile: flask.dockerfile
+    ports:
+      - 4000:4000
+    environment:
+      - DATABASE_URL=postgresql://admin:admin123@db:5432/retail_dw
+    depends_on:
+      - db
+
+  # db service
   db:
-    container_name: retail_datawarehouse
-    image: postgres:alpine
+    container_name: db
+    image: postgres:13
     environment:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: admin123
       POSTGRES_DB: retail_dw
     ports:
-      - 3005:5432
+      - 5432:5432
     volumes: 
       - pgdata:/var/lib/postgresql/data
 

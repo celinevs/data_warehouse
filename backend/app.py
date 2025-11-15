@@ -10,7 +10,7 @@ app.config['SQLALCHEMY_DATABASE_URL'] = environ.get('DATABASE_URL')
 db = SQLAlchemy(app)
 
 ############# TABLE ###############
-class DateDimension(db.Model):
+class DateData(db.Model):
     __tablename__ = "dim_tanggal"
 
     # Primary Key (format: YYYYMMDD)
@@ -149,7 +149,7 @@ def create_dates():
     try:
         data = request.get_json()
 
-        new_date = DateDimension(
+        new_date = DateData(
             tanggal_id=data.get("tanggal_id"),
             tanggal=data.get("tanggal"),
             deskripsi_tanggal_lengkap=data.get("deskripsi_tanggal_lengkap"),
@@ -198,7 +198,7 @@ def create_dates():
 @app.route('/api/flask/dates', methods=['GET'])
 def get_dates():
     try:
-        dates = DateDimension.query.all()
+        dates = DateData.query.all()
         dates_data = [d.json() for d in dates]
 
         return jsonify({
