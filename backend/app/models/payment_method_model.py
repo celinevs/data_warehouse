@@ -1,7 +1,7 @@
 from app.extensions import db
 
 
-class DateData(db.Model):
+class PaymentMethodData(db.Model):
     __tablename__ = "dim_metode_pembayaran"
 
     # Surrogate Key (Primary)
@@ -24,8 +24,4 @@ class DateData(db.Model):
             "jenis_pembayaran": self.jenis_pembayaran,
             "penyedia": self.penyedia,
             "apakah_digital": self.apakah_digital
-        }
-
-    def json(self):
-        return {
         }
