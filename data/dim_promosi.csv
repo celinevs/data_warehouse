@@ -1,0 +1,11 @@
+ID_Promosi,Nama_Promosi,Tipe_Promosi,Tipe_Media_Promosi,Kode_Promosi,Tanggal_Mulai,Tanggal_Akhir,Status,Jumlah_Promosi
+PRM001,Diskon Akhir Tahun,Diskon,Instagram,AKHIR2025,2025-12-01,2025-12-31,Aktif,20
+PRM002,Diskon Telur paket,Diskon,Toko Offline,TELUR2025,2025-01-01,2025-01-31,Selesai,10
+PRM003,Voucher Bread,Voucher,Aplikasi,BREAD2025,2025-10-20,2025-11-20,Selesai,5000
+PRM004,Promo Member Indomaret,Diskon,Aplikasi,MEMBER2025,2025-09-01,2025-12-31,Aktif,40
+PRM005,Voucher Bundle Indomie,Voucher,Aplikasi,INDOMIE2025,2025-09-20,2025-10-20,Selesai,4000
+PRM006,Promo Indomaret Snack Attack,Diskon,Instragram,SNACK2025,2025-11-05,2025-11-25,Selesai,20
+PRM007,Tebus Murah Produk Favorit,Diskon,Instagram,FAVORITE2025,2025-11-01,2025-11-30,Selesai,20
+PRM008,Kupon Valentine,Voucher,Aplikasi,VALENTINE2025,2025-02-10,2025-02-14,Selesai,8000
+PRM009,Diskon Buah & Sayur Segar,Diskon,Instagram,HEALTHY2025,2025-12-15,2025-12-20,Aktif,15
+PRM010,Promo produk indomaret,Diskon,Instagram,INDOMARET25,2025-11-20,2025-12-20,Aktif,5
