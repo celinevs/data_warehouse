@@ -1,6 +1,7 @@
 from flask import Flask
 from app.extensions import db, cors
-from app.routes.date_routes import date_bp, payment_method_bp
+from app.routes.date_routes import date_bp
+from app.routes.payment_method_routes import payment_method_bp
 from os import environ
 
 def create_app():
