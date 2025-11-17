@@ -19,10 +19,11 @@ export const metadata: Metadata = {
 };
 
 const sidebarItems = [
-  { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact" },
-  { label: "Dashboard", href: "/dashboard" },
+  { label: "Chart", href: "/chart" },
+  { label: "Fact Table", href: "/fact" },
+  { label: "Promotions", href: "/promotion" },
+  { label: "Inventory", href: "/inventory" },
+  { label: "Snapshot", href: "/snapshot" },
 ];
 
 export default function RootLayout({
@@ -32,13 +33,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <Sidebar items={sidebarItems} />
-        <main style={{ marginLeft: 0, padding: '24px' }}>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <Sidebar items={sidebarItems}>
           {children}
-        </main>
+        </Sidebar>
       </body>
     </html>
   );
