@@ -17,6 +17,7 @@ def create_app():
     # register blueprints
     app.register_blueprint(date_bp, url_prefix="/api/flask/dates")
     app.register_blueprint(payment_method_bp, url_prefix="/api/flask/payment-methods")
+    app.register_blueprint(payment_method_bp, url_prefix="/api/flask/cashiers")
 
     # create tables
     with app.app_context():
