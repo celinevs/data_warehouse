@@ -1,0 +1,102 @@
+id_produk,nama_produk,nama_brand,kode_SKU,kategori,subkategori
+P001,So Klin Deterjen Cair Violet Blossom Refill 700 ml,So Klin,8992759100001,Kebersihan Rumah,Deterjen Cair
+P002,Quaker Oatmeal Instan 800 g,Quaker,8992759100002,Makanan,Sereal
+P003,Frisian Flag Krimer Kental Manis Cokelat 535 g,Frisian Flag,8992759100003,Minuman,Krimer Kental Manis
+P004,Ultra Milk Susu UHT Full Cream 250 ml,Ultra Milk,8992759100004,Minuman,Susu UHT
+P005,Milo UHT Activ-Go Pack 4 × 110 ml,Milo,8992759100005,Minuman,Susu UHT
+P006,Real Good Susu UHT Sereal Cokelat 125 ml,Real Good,8992759100006,Minuman,Susu UHT
+P007,Biskuat Biskuit Coklat 106.4 g,Biskuat,8992759100007,Makanan,Biskuit
+P008,Sedaap Mi Instan Soto 5 × 75 g,Sedaap,8992759100008,Makanan,Mi Instan
+P009,Khong Guan Mini Biskuit Assorted Merah Kaleng 650 g,Khong Guan,8992759100009,Makanan,Biskuit Kaleng
+P010,Roma Malkist Coklat Kelapa 95 g,Roma,8992759100010,Makanan,Biskuit
+P011,Roma Malkist Kelapa 105 g,Roma,8992759100011,Makanan,Biskuit
+P012,Indomie Goreng Rendang,Indomie,8992759100012,Makanan,Mi Instan
+P013,Indomie Jumbo Ayam Panggang,Indomie,8992759100013,Makanan,Mi Instan
+P014,Nescafe Latte,Nescafe,8992759100014,Minuman,Kopi
+P015,Nescafe Classic,Nescafe,8992759100015,Minuman,Kopi
+P016,Teh Pucuk Harum,Teh Pucuk,8992759100016,Minuman,Teh
+P017,Frestea Melati,Frestea,8992759100017,Minuman,Teh
+P018,Cimory Yogurt Drink Original,Cimory,8992759100018,Minuman,Yogurt
+P019,Cimory Yogurt Drink Blueberry,Cimory,8992759100019,Minuman,Yogurt
+P020,Chitato BBQ,Chitato,8992759100020,Cemilan,Keripik
+P021,Chitato Sapi Panggang,Chitato,8992759100021,Cemilan,Keripik
+P022,Lays Rumput Laut,Lays,8992759100022,Cemilan,Keripik
+P023,Qtela Tempe Original,Qtela,8992759100023,Cemilan,Keripik
+P024,Qtela Singkong Balado,Qtela,8992759100024,Cemilan,Keripik
+P025,Pockey Strawberry,Pockey,8992759100025,Cemilan,Biskuit
+P026,Pockey Coklat,Pockey,8992759100026,Cemilan,Biskuit
+P027,Oreo Original,Oreo,8992759100027,Cemilan,Biskuit
+P028,Oreo Chocolate Cream,Oreo,8992759100028,Cemilan,Biskuit
+P029,Beng Beng Wafer,Beng Beng,8992759100029,Cemilan,Wafer
+P030,SilverQueen Almond,SilverQueen,8992759100030,Cemilan,Cokelat
+P031,SilverQueen Cashew,SilverQueen,8992759100031,Cemilan,Cokelat
+P032,Kit Kat 4 Fingers,Kit Kat,8992759100032,Cemilan,Cokelat
+P033,Tango Wafer Vanilla,Tango,8992759100033,Cemilan,Wafer
+P034,Tango Wafer Chocolate,Tango,8992759100034,Cemilan,Wafer
+P035,Roti Sari Roti Tawar,Sari Roti,8992759100035,Makanan,Roti
+P036,Roti Sari Roti Coklat,Sari Roti,8992759100036,Makanan,Roti
+P037,Roti Sari Roti Keju,Sari Roti,8992759100037,Makanan,Roti
+P038,Beras Sedaap 5kg,Sedaap,8992759100038,Makanan,Beras
+P039,Beras Maknyuss 5kg,Maknyuss,8992759100039,Makanan,Beras
+P040,Telur Ayam 1kg,Indomaret,8992759100040,Makanan,Telur
+P041,Gulaku Premium 1kg,Gulaku,8992759100041,Makanan,Gula
+P042,Gulaku Kuning 1kg,Gulaku,8992759100042,Makanan,Gula
+P043,Minyak Goreng Bimoli 1L,Bimoli,8992759100043,Makanan,Minyak
+P044,Minyak Goreng Sania 1L,Sania,8992759100044,Makanan,Minyak
+P045,Minyak Goreng Tropical 1L,Tropical,8992759100045,Makanan,Minyak
+P046,Tisu Wajah ,Indomaret,8992759100046,Non-Makanan,LPG
+P047,Baygon Aerosol,Baygon,8992759100047,Non-Makanan,Tisu
+P048,Vape Refill,Vape,8992759100048,Non-Makanan,Obat Nyamuk
+P049,Hit Mat Elektrik,Hit,8992759100049,Non-Makanan,Obat Nyamuk
+P050,Pepsodent White,Pepsodent,8992759100050,Non-Makanan,Perawatan Gigi
+P051,Pepsodent Charcoal,Pepsodent,8992759100051,Non-Makanan,Perawatan Gigi
+P052,CloseUp Menthol Burst,CloseUp,8992759100052,Non-Makanan,Perawatan Gigi
+P053,Shampoo Sunsilk Hitam,Sunsilk,8992759100053,Non-Makanan,Shampoo
+P054,Shampoo Clear Anti Dandruff,Clear,8992759100054,Non-Makanan,Shampoo
+P055,Shampoo Pantene Anti Lepek,Pantene,8992759100055,Non-Makanan,Shampoo
+P056,Sabun Lifebuoy Merah,Lifebuoy,8992759100056,Non-Makanan,Sabun
+P057,Sabun Lux Soft Touch,Lux,8992759100057,Non-Makanan,Sabun
+P058,Sabun Dove Beauty Bar,Dove,8992759100058,Non-Makanan,Sabun
+P059,Tissue Paseo 250,Paseo,8992759100059,Non-Makanan,Tisu
+P060,Tissue Nice 250,Nice,8992759100060,Non-Makanan,Tisu
+P061,Tissue Tessa 250,Tessa,8992759100061,Non-Makanan,Tisu
+P062,Detergen Rinso Anti Noda,Rinso,8992759100062,Non-Makanan,Detergen
+P063,Detergen Daia Pink,Daia,8992759100063,Non-Makanan,Detergen
+P064,Detergen Attack Softener,Attack,8992759100064,Non-Makanan,Detergen
+P065,Pewangi Molto Blue,Molto,8992759100065,Non-Makanan,Pewangi
+P066,Pewangi Molto Pink,Molto,8992759100066,Non-Makanan,Pewangi
+P067,Pewangi Royale Sunny Day,Royale,8992759100067,Non-Makanan,Pewangi
+P068,Tisu Basah Mitu,Mitu,8992759100068,Non-Makanan,Tisu Basah
+P069,Tisu Basah Pigeon,Pigeon,8992759100069,Non-Makanan,Tisu Basah
+P070,Tisu Basah Sweety,Sweety,8992759100070,Non-Makanan,Tisu Basah
+P071,Diapers Sweety Gold,Sweety,8992759100071,Non-Makanan,Popok
+P072,Diapers Merries Pants,Merries,8992759100072,Non-Makanan,Popok
+P073,Diapers Mamypoko M,Mamypoko,8992759100073,Non-Makanan,Popok
+P074,Susu Formula SGM Ananda 1,SGM,8992759100074,Minuman,Susu Formula
+P075,Susu Formula Bebelac 3,Bebelac,8992759100075,Minuman,Susu Formula
+P076,Susu Formula Frisian Flag Primanutri,Frisian Flag,8992759100076,Minuman,Susu Formula
+P077,Kecap Bango Manis,Bango,8992759100077,Makanan,Saus
+P078,Kecap ABC Manis,ABC,8992759100078,Makanan,Saus
+P079,Saus Sambal ABC,ABC,8992759100079,Makanan,Saus
+P080,Saus Tomat ABC,ABC,8992759100080,Makanan,Saus
+P081,Kornet Pronas 340g,Pronas,8992759100081,Makanan,Kornet
+P082,Sarden ABC 425g,ABC,8992759100082,Makanan,Sarden
+P083,Sarden Botan 425g,Botan,8992759100083,Makanan,Sarden
+P084,Sosis Kanzler Singles,Kanzler,8992759100084,Makanan,Sosis
+P085,Nugget So Nice,S0 Nice,8992759100085,Makanan,Nugget
+P086,Nugget Fiesta,Fie sta,8992759100086,Makanan,Nugget
+P087,Teh Kotak Sosro,Teh Kotak,8992759100087,Minuman,Teh
+P088,Floridina Orange,Floridina,8992759100088,Minuman,Minuman Buah
+P089,Nu Green Tea Original,Nu Green Tea,8992759100089,Minuman,Teh
+P090,You C1000 Lemon,You C1000,8992759100090,Minuman,Vitamin
+P091,Mizone Lychee,Larutan Mizone,8992759100091,Minuman,Isotonik
+P092,Isoplus Isotonik,Isoplus,8992759100092,Minuman,Isotonik
+P093,Coolant Drink,Coolant,8992759100093,Minuman,Herbal
+P094,Kopi Kapal Api Special,Kapal Api,8992759100094,Minuman,Kopi
+P095,Kopi Kapal Api Mocha,Kapal Api,8992759100095,Minuman,Kopi
+P096,Kopi ABC Susu,ABC,8992759100096,Minuman,Kopi
+P097,Susu Bear Brand,Bear Brand,8992759100097,Minuman,Susu Steril
+P098,Susu Milo RTD,Milo,8992759100098,Minuman,Susu
+P099,Aice Chocolate Stick,Aice,8992759100099,Makanan,Es Krim
+P100,Aice Mango Slush,Aice,8992759100100,Makanan,Es Krim
+P101,Aquviva 12x250ml,Aquviva,8992759100100,Minuman,Air

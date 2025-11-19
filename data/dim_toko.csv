@@ -1,0 +1,11 @@
+id_tokoh,nama_toko,alamat_jalan,kelurahan,kecamatan,kota,kode_pos,provinsi,alamat_lengkap,nomor_telepon_tokoh,email_tokoh
+S001,Indomaret Angkasa RA1,Jl. Angkasa Pura,Gunung Sahari Selatan,Kemayoran,Jakarta Pusat,10610,DKI Jakarta,"Jl. Angkasa RA1, Kel. Gunung Sahari Selatan, Kec. Kemayoran, Kota Jakarta Pusat, 10610",021890279,indomaret.gdserpong@store.id
+S002,Indomaret BSD Utara,Jl. Letnan Sutopo No.88,Rawa Buntu,Serpong,Tangerang Selatan,15310,Banten,"Jl. Letnan Sutopo No.88, Rawa Buntu, Serpong, Tangerang Selatan 15310, Banten",0215378811,bsd.utara@indomaret.id
+S003,Indomaret Ciputat Raya,Jl. Ciputat Raya No.102,Ciputat,Ciputat Timur,Tangerang Selatan,15412,Banten,"Jl. Ciputat Raya No.102, Ciputat, Ciputat Timur, Tangerang Selatan 15412, Banten",0217499921,alfamart.ciputatraya@store.id
+S004,Indomaret Pamulang 2,Jl. Siliwangi No.45,Bambu Apus,Pamulang,Tangerang Selatan,15415,Banten,"Jl. Siliwangi No.45, Bambu Apus, Pamulang, Tangerang Selatan 15415, Banten",0217448852,pamulang2@alfamart.id
+S005,Indomaret Ciledug Center,Jl. HOS Cokroaminoto No.55,Parung Serab,Ciledug,Tangerang,15153,Banten,"Jl. HOS Cokroaminoto No.55, Parung Serab, Ciledug, Tangerang 15153, Banten",0217347711,ciledug.center@indomaret.id
+S006,Indomaret Kota Wisata,Jl. Boulevard Kota Wisata No.9,Cibubur,Gunung Putri,Bogor,16966,Jawa Barat,"Jl. Boulevard Kota Wisata No.9, Cibubur, Gunung Putri, Bogor 16966, Jawa Barat",0218712231,kotawisata@indomaret.id
+S007,Indomaret Cibubur Junction,Jl. Alternatif Cibubur No.21,Harjamukti,Cimanggis,Depok,16454,Jawa Barat,"Jl. Alternatif Cibubur No.21, Harjamukti, Cimanggis, Depok 16454, Jawa Barat",0218749912,alfamart.cibuburjunction@store.id
+S008,Indomaret Margonda Raya,Jl. Margonda Raya No.200,Pondok Cina,Beji,Depok,16424,Jawa Barat,"Jl. Margonda Raya No.200, Pondok Cina, Beji, Depok 16424, Jawa Barat",02177234567,margonda@indomaret.id
+S009,Indomaret Kuningan City,Jl. Prof. Dr. Satrio No.15,Karet Kuningan,Setiabudi,Jakarta Selatan,12940,DKI Jakarta,"Jl. Prof. Dr. Satrio No.15, Karet Kuningan, Setiabudi, Jakarta Selatan 12940, DKI Jakarta",0215766789,kuningan.city@alfamart.id
+S010,Indomaret Sudirman Plaza,Jl. Jendral Sudirman No.20,Bendungan Hilir,Tanah Abang,Jakarta Pusat,10210,DKI Jakarta,"Jl. Jendral Sudirman No.20, Bendungan Hilir, Tanah Abang, Jakarta Pusat 10210, DKI Jakarta",02157991234,sudirman.plaza@indomaret.id
