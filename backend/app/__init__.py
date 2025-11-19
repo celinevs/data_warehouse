@@ -5,6 +5,7 @@ from app.routes.payment_method_routes import payment_method_bp
 from app.routes.cashier_routes import cashier_bp
 from app.routes.promotion_routes import promotion_bp
 from app.routes.product_routes import product_bp
+from app.routes.store_routes import store_bp
 from os import environ
 
 def create_app():
@@ -23,6 +24,7 @@ def create_app():
     app.register_blueprint(cashier_bp, url_prefix="/api/flask/cashiers")
     app.register_blueprint(promotion_bp, url_prefix="/api/flask/promotions")
     app.register_blueprint(product_bp, url_prefix="/api/flask/promotions")
+    app.register_blueprint(store_bp, url_prefix="/api/flask/promotions")
 
     # create tables
     with app.app_context():
