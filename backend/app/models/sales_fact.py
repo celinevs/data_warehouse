@@ -1,5 +1,5 @@
 from app.extensions import db
-from sqlalchemy import Float, Integer, String, ForeignKey, Date
+from sqlalchemy import Float, Integer, String, ForeignKey
 
 class SalesFact(db.Model):
     __tablename__ = "fakta_penjualan"
@@ -8,13 +8,13 @@ class SalesFact(db.Model):
     id_fakta_penjualan = db.Column(Integer, primary_key=True)
 
     # Foreign Keys
-    tanggal_id = db.Column(Integer, nullable=False)
-    id_waktu = db.Column(String(4), db.ForeignKey("dim_waktu.id_waktu"), nullable=False)
-    id_produk = db.Column(String(10), nullable=False)
-    id_toko = db.Column(String(10), nullable=False)
-    id_promosi = db.Column(String(10), nullable=True)
-    id_kasir = db.Column(String(10), nullable=False)
-    metode_pembayaran_sk = db.Column(Integer, nullable=False)
+    tanggal_id = db.Column(String(8), ForeignKey("dim_tanggal.tanggal_id"), nullable=False)
+    id_waktu = db.Column(String(4), ForeignKey("dim_waktu.id_waktu"), nullable=False)
+    id_produk = db.Column(String(4), ForeignKey("dim_produk.id_produk"), nullable=False)
+    id_toko = db.Column(String(10), ForeignKey("dim_toko.id_toko"), nullable=False)
+    id_promosi = db.Column(String(6), ForeignKey("dim_promosi.id_promosi"), nullable=True)
+    id_kasir = db.Column(String(6), ForeignKey("dim_waktu.id_kasir"), nullable=False)
+    metode_pembayaran_sk = db.Column(Integer, ForeignKey("dim_metode_pembayaran.metode_pembayaran_sk"), nullable=False)
     nomor_struk = db.Column(String(20), nullable=False)
 
     # Measures / numeric
