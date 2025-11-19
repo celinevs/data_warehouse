@@ -9,7 +9,7 @@ services:
     ports:
       - 4000:4000
     environment:
-      - DATABASE_URL=postgresql://admin:admin123@db:5432/retail_dw
+      - DATABASE_URL=postgresql://postgres:IoeXFiAnfzgzRbDSmKcOfECJjqChYzyH@mainline.proxy.rlwy.net:21599/railway
     depends_on:
       - db
 
