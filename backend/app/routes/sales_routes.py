@@ -1,5 +1,7 @@
 from flask import Blueprint, request, jsonify
 from app.models.sales_fact import SalesFact
+from app.models.product_model import ProductData
+from app.models.store_model import StoreData
 from app.extensions import db
 
 faktur_bp = Blueprint("fact-sales", __name__)
@@ -86,6 +88,46 @@ def get_faktur_by_struk(struk):
     if not faktur:
         return jsonify({"message": "Not Found"}), 404
     return jsonify({"message": "OK", "data": faktur.json()}), 200
+
+# GET store's gross margin by product by date
+@faktur_bp.route('/penjualan/toko-produk', Methods=['GET'])
+def get_toko_by_product_and_date():
+    id_produk = request.args.get('id_produk')
+    tanggal_mulai = request.args.get('start')
+    tanggal_akhir = request.args.get('end')
+
+    if not id_produk or not tanggal_mulai or not tanggal_akhir:
+        return jsonify({"error": "Harus ada produk_id, tanggal mulai, dan tanggal akhir"}), 400
+    
+    results = (
+        db.session.query(
+            StoreData.id_toko, 
+            StoreData.nama_toko, 
+            db.func.sum((SalesFact.harga_satuan_jual - SalesFact.harga_satuan_beli) * SalesFact.jumlah_penjualan)
+            .label("gross_margin")
+        )
+        .join(StoreData, SalesFact.id_toko == StoreData.id_toko)
+        .filter(SalesFact.id_produk == id_produk)
+        .filter(SalesFact.tanggal_id.between(tanggal_mulai, tanggal_akhir))
+        .group_by(StoreData.id_toko, StoreData.nama_toko)
+        .all()
+    )
+
+    data = [
+        {
+            "id_toko": r.id_toko,
+            "nama_toko": r.nama_toko,
+            "gross_margin": float(r.gross_margin or 0)
+        } 
+        for r in results
+    ]
+
+    return jsonify({
+        "id_produk": id_produk, 
+        "tanggal_mulai": tanggal_mulai, 
+        "tanggal_akhir": tanggal_akhir, 
+        "gross_margin_per_toko": data
+    }), 200
 
 # POST create new faktur
 @faktur_bp.route('/', methods=['POST'])
