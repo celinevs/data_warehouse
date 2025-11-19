@@ -8,6 +8,7 @@ from app.routes.product_routes import product_bp
 from app.routes.store_routes import store_bp
 from app.routes.time_routes import time_bp
 from app.routes.sales_routes import faktur_bp
+from app.routes.acc_snap_routes import acc_snap_bp
 from os import environ
 
 def create_app():
@@ -29,6 +30,7 @@ def create_app():
     app.register_blueprint(store_bp, url_prefix="/api/flask/stores")
     app.register_blueprint(time_bp, url_prefix="/api/flask/times")
     app.register_blueprint(faktur_bp, url_prefix="/api/flask/fact-sales")
+    app.register_blueprint(acc_snap_bp, url_prefix="/api/flask/acc-snapshot")
 
     # create tables
     with app.app_context():
