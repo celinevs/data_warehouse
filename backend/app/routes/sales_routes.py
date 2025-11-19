@@ -89,9 +89,9 @@ def get_faktur_by_struk(struk):
         return jsonify({"message": "Not Found"}), 404
     return jsonify({"message": "OK", "data": faktur.json()}), 200
 
-# GET store's gross margin by product by date
-@faktur_bp.route('/penjualan/toko-produk', Methods=['GET'])
-def get_toko_by_product_and_date():
+# GET store's gross profit by product by date (Derived Facts)
+@faktur_bp.route('/penjualan-toko/gross-profit', methods=['GET'])
+def get_toko_gross_profit():
     id_produk = request.args.get('id_produk')
     tanggal_mulai = request.args.get('start')
     tanggal_akhir = request.args.get('end')
@@ -103,8 +103,8 @@ def get_toko_by_product_and_date():
         db.session.query(
             StoreData.id_toko, 
             StoreData.nama_toko, 
-            db.func.sum((SalesFact.harga_satuan_jual - SalesFact.harga_satuan_beli) * SalesFact.jumlah_penjualan)
-            .label("gross_margin")
+            db.func.sum(SalesFact.total_nilai_jual - SalesFact.total_nilai_beli)
+            .label("gross_profit")
         )
         .join(StoreData, SalesFact.id_toko == StoreData.id_toko)
         .filter(SalesFact.id_produk == id_produk)
@@ -117,6 +117,53 @@ def get_toko_by_product_and_date():
         {
             "id_toko": r.id_toko,
             "nama_toko": r.nama_toko,
+            "gross_profit": float(r.gross_profit or 0)
+        } 
+        for r in results
+    ]
+
+    return jsonify({
+        "id_produk": id_produk, 
+        "tanggal_mulai": tanggal_mulai, 
+        "tanggal_akhir": tanggal_akhir, 
+        "gross_profit_per_toko": data
+    }), 200
+
+# GET store's gross margin by product by date (Non-additive Facts)
+@faktur_bp.route('/penjualan-toko/gross-margin', methods=['GET'])
+def get_toko_by_product_and_date():
+    id_produk = request.args.get('id_produk')
+    tanggal_mulai = request.args.get('start')
+    tanggal_akhir = request.args.get('end')
+
+    if not id_produk or not tanggal_mulai or not tanggal_akhir:
+        return jsonify({"error": "Harus ada produk_id, tanggal mulai, dan tanggal akhir"}), 400
+
+
+    results = (
+        db.session.query(
+            StoreData.id_toko, 
+            StoreData.nama_toko, 
+            db.func.sum(SalesFact.total_nilai_jual).label("revenue"), 
+            db.func.sum(SalesFact.total_nilai_jual - SalesFact.total_nilai_beli).label("gross_profit")
+            (
+                (db.func.sum(SalesFact.total_nilai_jual - SalesFact.total_nilai_beli))/(db.func.sum(SalesFact.total_nilai_jual))
+            ).label("gross_margin")
+        )
+        .join(StoreData, SalesFact.id_toko == StoreData.id_toko)
+        .filter(SalesFact.id_produk == id_produk)
+        .filter(SalesFact.tanggal_id.between(tanggal_mulai, tanggal_akhir))
+        .group_by(StoreData.id_toko, StoreData.nama_toko)
+        .all()  
+    )
+
+
+    data = [
+        {
+            "id_toko": r.id_toko,
+            "nama_toko": r.nama_toko,
+            "gross_profit": float(r.gross_profit or 0), 
+            "revenue": float(r.revenue or 0),
             "gross_margin": float(r.gross_margin or 0)
         } 
         for r in results
