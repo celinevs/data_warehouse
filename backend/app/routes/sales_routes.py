@@ -71,6 +71,21 @@ def get_faktur_by_kasir(id_kasir):
         return jsonify({"message": "Not Found"}), 404
     return jsonify({"message": "OK", "data": [f.json() for f in faktur_list]}), 200
 
+# GET by metode_pembayaran_sk
+@faktur_bp.route('/sk/<int:sk>', methods=['GET'])
+def get_faktur_by_sk(sk):
+    faktur = SalesFact.query.filter_by(metode_pembayaran_sk=sk).all()
+    if not faktur:
+        return jsonify({"message": "Not Found"}), 404
+    return jsonify({"message": "OK", "data": faktur.json()}), 200
+
+# GET by nomor struk
+@faktur_bp.route('/struk/<string:struk>', methods=['GET'])
+def get_faktur_by_sk(struk):
+    faktur = SalesFact.query.filter_by(nomor_struk=struk).all()
+    if not faktur:
+        return jsonify({"message": "Not Found"}), 404
+    return jsonify({"message": "OK", "data": faktur.json()}), 200
 
 # POST create new faktur
 @faktur_bp.route('/', methods=['POST'])
