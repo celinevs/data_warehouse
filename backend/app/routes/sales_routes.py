@@ -2,7 +2,7 @@ from flask import Blueprint, request, jsonify
 from app.models.sales_fact import SalesFact
 from app.extensions import db
 
-faktur_bp = Blueprint("faktur-penjualan", __name__)
+faktur_bp = Blueprint("fact-sales", __name__)
 
 # GET all faktur
 @faktur_bp.route('/', methods=['GET'])
@@ -24,7 +24,7 @@ def get_faktur_by_id(id_fakta):
 
 # GET by tanggal_id
 @faktur_bp.route('/tanggal/<string:tanggal_id>', methods=['GET'])
-def get_faktur_by_id(tanggal_id):
+def get_faktur_by_tanggal(tanggal_id):
     faktur = SalesFact.query.filter_by(tanggal_id=tanggal_id)
     if not faktur:
         return jsonify({"message": "Not Found"}), 404
@@ -81,7 +81,7 @@ def get_faktur_by_sk(sk):
 
 # GET by nomor struk
 @faktur_bp.route('/struk/<string:struk>', methods=['GET'])
-def get_faktur_by_sk(struk):
+def get_faktur_by_struk(struk):
     faktur = SalesFact.query.filter_by(nomor_struk=struk).all()
     if not faktur:
         return jsonify({"message": "Not Found"}), 404
