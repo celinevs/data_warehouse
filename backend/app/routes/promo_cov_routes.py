@@ -1,15 +1,43 @@
 from flask import Blueprint, request, jsonify
 from app.models.promo_cov_fact import PromotionCoverageFact
+from app.models.sales_fact import SalesFact
 from app.extensions import db
+from sqlalchemy import and_
 
 promo_cov_bp = Blueprint("promo-cov", __name__)
 
-# GET all faktur
-@promo_cov_bp.route('/', methods=['GET'])
-def get_all_promo_cov():
-    faktur_list = PromotionCoverageFact.query.all()
+# GET product that did not sold within promotion's date
+@promo_cov_bp.route('/produk-tidak-laku', methods=['GET'])
+def get_unsold_product():
+    results = (
+        db.session.query(PromotionCoverageFact)
+        .outerjoin(
+            SalesFact, 
+            and_(
+                PromotionCoverageFact.tanggal_id == SalesFact.tanggal_id, 
+                PromotionCoverageFact.id_produk == SalesFact.id_produk, 
+                PromotionCoverageFact.id_toko == SalesFact.id_toko, 
+                PromotionCoverageFact.id_promosi == SalesFact.id_promosi
+            )
+        )
+        .filter(SalesFact.id_fakta_penjualan == None)
+        .all()
+    )
+
+    if not results:
+        return jsonify({"unsold_product": []}), 400
+
+    data = [
+        {
+            "coverage_id": r.coverage_id, 
+            "tanggal_id": r.tanggal_id,   
+            "id_produk": r.id_produk, 
+            "id_toko": r.id_toko,
+            "id_promosi": r.id_promosi
+        } 
+        for r in results
+    ]
+
     return jsonify({
-        "message": "OK",
-        "count": len(faktur_list),
-        "data": [f.json() for f in faktur_list]
+        "unsold_product": data
     }), 200
