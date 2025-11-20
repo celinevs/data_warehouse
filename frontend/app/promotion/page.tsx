@@ -1,6 +1,6 @@
 'use client';
 
-import { Typography, Box, Button } from "@mui/material";
+import { Typography, Box, Button, Stack } from "@mui/material";
 import { useEffect, useState } from "react";
 import { getPromotions } from "@/api/api";
 import { Promotion } from "@/model/Dimension";
@@ -62,9 +62,9 @@ export default function PromotionPage() {
     console.log("Detail promosi:", row);
   };
   return (
-    <Box sx={{ maxWidth: '990px', width: '100%' }}>
+    <Stack sx={{ maxWidth: '990px', width: '100%' }} gap={5}>
       <Typography variant="h4" className="mb-10">Promotion</Typography>
       <DataTable columns={columns} rows={promotions} />
-    </Box>
+    </Stack>
   );
 }

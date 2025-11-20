@@ -41,6 +41,21 @@ export interface Produk {
   nama_produk: string;
 }
 
+export interface Snapshot {
+  snapshot_id: number;
+  tanggal_id: string;
+  id_toko: string;
+  id_produk: string;
+  jumlah_stok: number;
+}
+
+export interface AccumulativeSnapshot {
+  nomor_penerimaan_barang: string;
+  key_tanggal_terima: string;
+  key_tanggal_inspeksi: string;
+  tanggal_penempatan: string;  
+}
+
 export interface GrossProfitResponse {
   id_produk: string;
   tanggal_mulai: string;

@@ -1,6 +1,6 @@
 'use client';
 
-import { Typography, Box } from "@mui/material";
+import { Typography, Stack } from "@mui/material";
 import { useState, useEffect } from "react";
 import DataTable, { Column } from "@/component/DataTable";
 import { FactPenjualan } from "@/model/Dimension";
@@ -38,9 +38,9 @@ export default function FactPage() {
     })();
   }, []);
   return (
-    <Box sx={{ maxWidth: '990px', width: '100%' }}>
+    <Stack sx={{ maxWidth: '990px', width: '100%' }} gap={5}>
       <Typography variant="h4">Fact Table</Typography>
       <DataTable columns={columns} rows={sales} />
-    </Box>
+    </Stack>
   );
 }

@@ -1,15 +1,13 @@
 'use client';
 
-import { Typography, Box } from "@mui/material";
+import { Typography, Stack } from "@mui/material";
 import GrossProfitChart from "./GrossProfitChart";
-
-type FilterForm = Record<string, any>;
 
 export default function ChartPage() {
   return (
-    <Box>
+    <Stack sx={{ maxWidth: '990px', width: '100%' }} gap={5}>
       <Typography variant="h4">Chart</Typography>
       <GrossProfitChart />
-    </Box>
+    </Stack>
   );
 }
