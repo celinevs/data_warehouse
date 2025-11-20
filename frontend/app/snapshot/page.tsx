@@ -34,12 +34,12 @@ export default function SnapshotPage() {
   };
 
   return (
-    <Stack sx={{ maxWidth: '990px', width: '100%' }} gap={5}>
+    <Stack sx={{ maxWidth: '990px', width: '100%' }} gap={3}>
       <Typography variant="h4">Snapshot</Typography>
       <Paper>
         <Stack alignItems='center' gap={3} p={2}>
           <Typography variant="h5">Simulasi snapshot</Typography>
-          <Typography>tekan tombol dibawah untuk menangkap snapshot</Typography>
+          <Typography>tekan tombol dibawah untuk menangkap snapshot dummy</Typography>
           <Button
             variant="contained"
             onClick={handleShowSnapshot}

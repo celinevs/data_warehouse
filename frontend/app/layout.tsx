@@ -21,6 +21,7 @@ export const metadata: Metadata = {
 const sidebarItems = [
   { label: "Chart", href: "/chart" },
   { label: "Fact Table", href: "/fact" },
+  { label: "Date Table", href: "/date" },
   { label: "Promotions", href: "/promotion" },
   { label: "Inventory", href: "/inventory" },
   { label: "Snapshot", href: "/snapshot" },

@@ -41,6 +41,38 @@ export interface Produk {
   nama_produk: string;
 }
 
+export interface Date {
+  tanggal_id: string;
+  tanggal: string | null;
+  deskripsi_tanggal_lengkap: string;
+  hari_dalam_minggu: string;
+  nomor_hari_dalam_bulan: number;
+  nomor_hari_dalam_tahun: number;
+  nomor_hari_dalam_bulan_fiskal: number;
+  nomor_hari_dalam_tahun_fiskal: number;
+  indikator_hari_terakhir_dalam_bulan: boolean;
+  tanggal_akhir_minggu_kalender: string | null;
+  nomor_minggu_dalam_tahun_kalender: number;
+  nama_bulan_kalender: string;
+  nomor_bulan_dalam_tahun_kalender: number;
+  tahun_bulan_kalender: string;
+  kuartal_kalender: string;
+  tahun_kuartal_kalender: string;
+  tahun_kalender: number;
+  minggu_fiskal: string;
+  nomor_minggu_dalam_tahun_fiskal: number;
+  bulan_fiskal: string;
+  nomor_bulan_dalam_tahun_fiskal: number;
+  tahun_bulan_fiskal: string;
+  kuartal_fiskal: string;
+  tahun_kuartal_fiskal: string;
+  setengah_tahun_fiskal: string;
+  tahun_fiskal: number;
+  indikator_hari_libur: boolean;
+  indikator_hari_kerja: boolean;
+  cap_waktu_sql: string | null;
+}
+
 export interface Snapshot {
   snapshot_id: number;
   tanggal_id: string;
@@ -53,7 +85,7 @@ export interface AccumulativeSnapshot {
   nomor_penerimaan_barang: string;
   key_tanggal_terima: string;
   key_tanggal_inspeksi: string;
-  tanggal_penempatan: string;  
+  tanggal_penempatan: string;
 }
 
 export interface GrossProfitResponse {

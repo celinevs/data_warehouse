@@ -38,7 +38,7 @@ export default function FactPage() {
     })();
   }, []);
   return (
-    <Stack sx={{ maxWidth: '990px', width: '100%' }} gap={5}>
+    <Stack sx={{ maxWidth: '990px', width: '100%' }} gap={3}>
       <Typography variant="h4">Fact Table</Typography>
       <DataTable columns={columns} rows={sales} />
     </Stack>

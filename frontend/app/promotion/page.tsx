@@ -6,19 +6,6 @@ import { getPromotions } from "@/api/api";
 import { Promotion } from "@/model/Dimension";
 import DataTable, { Column } from "@/component/DataTable";
 
-// const rows: Promotion[] = [
-//   {
-//     id_promosi: 'PRM001',
-//     nama_promosi: 'Diskon Akhir Tahun',
-//     tipe_promosi: 'Diskon',
-//     tipe_media_promosi: 'Instagram',
-//     kode_promosi: 'ENDYEAR20',
-//     tanggal_mulai: '2025-12-01',
-//     tanggal_akhir: '2025-12-31',
-//     status: 'Aktif',
-//     jumlah_promosi: 20,
-//   },
-// ];
 export default function PromotionPage() {
   const [promotions, setPromotions] = useState<Promotion[]>([]);
 
@@ -62,7 +49,7 @@ export default function PromotionPage() {
     console.log("Detail promosi:", row);
   };
   return (
-    <Stack sx={{ maxWidth: '990px', width: '100%' }} gap={5}>
+    <Stack sx={{ maxWidth: '990px', width: '100%' }} gap={3}>
       <Typography variant="h4" className="mb-10">Promotion</Typography>
       <DataTable columns={columns} rows={promotions} />
     </Stack>
