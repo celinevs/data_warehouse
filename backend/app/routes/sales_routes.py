@@ -131,7 +131,7 @@ def get_toko_gross_profit():
 
 # GET store's gross margin by product by date (Non-additive Facts)
 @faktur_bp.route('/penjualan-toko/gross-margin', methods=['GET'])
-def get_toko_by_product_and_date():
+def get_toko_gross_margin():
     id_produk = request.args.get('id_produk')
     tanggal_mulai = request.args.get('start')
     tanggal_akhir = request.args.get('end')
