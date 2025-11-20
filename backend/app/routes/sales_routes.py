@@ -142,12 +142,12 @@ def get_toko_gross_margin():
 
     results = (
         db.session.query(
-            StoreData.id_toko, 
-            StoreData.nama_toko, 
-            db.func.sum(SalesFact.total_nilai_jual).label("revenue"), 
-            db.func.sum(SalesFact.total_nilai_jual - SalesFact.total_nilai_beli).label("gross_profit")
+            StoreData.id_toko,
+            StoreData.nama_toko,
+            db.func.sum(SalesFact.total_nilai_jual).label("revenue"),
+            db.func.sum(SalesFact.total_nilai_jual - SalesFact.total_nilai_beli).label("gross_profit"),
             (
-                db.func.sum(SalesFact.total_nilai_jual - SalesFact.total_nilai_beli)/
+                db.func.sum(SalesFact.total_nilai_jual - SalesFact.total_nilai_beli) /
                 db.func.sum(SalesFact.total_nilai_jual)
             ).label("gross_margin")
         )
@@ -155,9 +155,8 @@ def get_toko_gross_margin():
         .filter(SalesFact.id_produk == id_produk)
         .filter(SalesFact.tanggal_id.between(tanggal_mulai, tanggal_akhir))
         .group_by(StoreData.id_toko, StoreData.nama_toko)
-        .all()  
+        .all()
     )
-
 
     data = [
         {
