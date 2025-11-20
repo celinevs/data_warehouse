@@ -1,6 +1,7 @@
-import { ApiResponse, Promotion, FactPenjualan, GrossProfitResponse, Produk, Snapshot, AccumulativeSnapshot, Date } from "@/model/Dimension"
+import { ApiResponse, Promotion, FactPenjualan, GrossProfitResponse, GrossMarginResponse, Produk, Snapshot, AccumulativeSnapshot, Date } from "@/model/Dimension"
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL
+console.log(API_URL)
 
 export async function getPromotions(): Promise<ApiResponse<Promotion[]>> {
   const res = await fetch(`${API_URL}/promotions/`);
@@ -51,6 +52,23 @@ export async function getGrossProfit(
   }
 
   const data: GrossProfitResponse = await response.json();
+  return data;
+}
+
+export async function getGrossMargin(
+  id_produk: string,
+  start: string,
+  end: string
+): Promise<GrossMarginResponse> {
+  const response = await fetch(
+    `${API_URL}/fact-sales/penjualan-toko/gross-margin?id_produk=${id_produk}&start=${start}&end=${end}`
+  );
+
+  if (!response.ok) {
+    throw new Error(`Failed to fetch gross profit (${response.status})`);
+  }
+
+  const data: GrossMarginResponse = await response.json();
   return data;
 }
 

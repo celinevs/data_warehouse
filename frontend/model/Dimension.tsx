@@ -36,6 +36,12 @@ export interface GrossProfitPerToko {
   gross_profit: number;
 }
 
+export interface GrossMarginPerToko {
+  id_toko: string;
+  nama_toko: string;
+  gross_margin: number;
+}
+
 export interface Produk {
   id_produk: string;
   nama_produk: string;
@@ -95,6 +101,12 @@ export interface GrossProfitResponse {
   gross_profit_per_toko: GrossProfitPerToko[];
 }
 
+export interface GrossMarginResponse {
+  id_produk: string;
+  tanggal_mulai: string;
+  tanggal_akhir: string;
+  gross_margin_per_toko: GrossMarginPerToko[];
+}
 
 export interface ApiResponse<T> {
   message: string;
