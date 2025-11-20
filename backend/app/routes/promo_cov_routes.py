@@ -6,6 +6,22 @@ from sqlalchemy import and_
 
 promo_cov_bp = Blueprint("promo-cov", __name__)
 
+# GET promotion coverage table
+@promo_cov_bp.route('/', methods=['GET'])
+def get_promo_cov_table():
+    items = PromotionCoverageFact.query.order_by(
+        PromotionCoverageFact.coverage_id.asc()
+    ).all()
+
+    data = [i for i in items.json()]
+    
+    return jsonify({
+        "message": "OK",
+        "count": len(items),
+        "data": data
+    }), 200
+
+
 # GET product that did not sold within promotion's date
 @promo_cov_bp.route('/produk-tidak-laku', methods=['GET'])
 def get_unsold_product():

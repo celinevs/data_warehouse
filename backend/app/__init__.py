@@ -20,7 +20,7 @@ def create_app():
     app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('DATABASE_URL')
 
     # init extensions
-    cors.init_app(app)
+    cors.init_app(app, resources={r"/*": {"origins": "http://localhost:3000"}})
     db.init_app(app)
 
     # register blueprints
