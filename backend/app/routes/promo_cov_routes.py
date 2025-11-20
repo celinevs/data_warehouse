@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify
 from app.models.promo_cov_fact import PromotionCoverageFact
 from app.models.sales_fact import SalesFact
+from app.models.product_model import ProductData
 from app.extensions import db
 from sqlalchemy import and_
 
@@ -26,17 +27,18 @@ def get_promo_cov_table():
 @promo_cov_bp.route('/produk-tidak-laku', methods=['GET'])
 def get_unsold_product():
     results = (
-        db.session.query(PromotionCoverageFact)
-        .outerjoin(
-            SalesFact, 
-            and_(
-                PromotionCoverageFact.tanggal_id == SalesFact.tanggal_id, 
-                PromotionCoverageFact.id_produk == SalesFact.id_produk, 
-                PromotionCoverageFact.id_toko == SalesFact.id_toko, 
-                PromotionCoverageFact.id_promosi == SalesFact.id_promosi
-            )
+        db.session.query(PromotionCoverageFact, ProductData.nama_produk)
+        .join(ProductData, PromotionCoverageFact.id_produk == ProductData.id_produk)
+        .filter(
+            ~db.session.query(SalesFact)
+            .filter(
+                SalesFact.tanggal_id == PromotionCoverageFact.tanggal_id,
+                SalesFact.id_produk == PromotionCoverageFact.id_produk,
+                SalesFact.id_toko == PromotionCoverageFact.id_toko,
+                SalesFact.id_promosi == PromotionCoverageFact.id_promosi
+            ).exists()
         )
-        .filter(SalesFact.id_fakta_penjualan == None)
+        .order_by(PromotionCoverageFact.coverage_id.asc())
         .all()
     )
 
@@ -45,15 +47,17 @@ def get_unsold_product():
 
     data = [
         {
-            "coverage_id": r.coverage_id, 
-            "tanggal_id": r.tanggal_id,   
-            "id_produk": r.id_produk, 
-            "id_toko": r.id_toko,
-            "id_promosi": r.id_promosi
+            "coverage_id": r[0].coverage_id, 
+            "tanggal_id": r[0].tanggal_id,   
+            "id_produk": r[0].id_produk, 
+            "nama_produk": r[1],
+            "id_toko": r[0].id_toko,
+            "id_promosi": r[0].id_promosi
         } 
         for r in results
     ]
 
     return jsonify({
+        "count": len(data),
         "unsold_product": data
     }), 200
