@@ -41,6 +41,11 @@ export interface Produk {
   nama_produk: string;
 }
 
+export interface Store {
+  id_toko: string;
+  nama_toko: string;
+}
+
 export interface Date {
   tanggal_id: string;
   tanggal: string | null;

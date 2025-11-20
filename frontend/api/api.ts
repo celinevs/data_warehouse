@@ -1,4 +1,4 @@
-import { ApiResponse, Promotion, FactPenjualan, GrossProfitResponse, Produk, Snapshot, AccumulativeSnapshot, FactlessResponse, Date} from "@/model/Dimension"
+import { ApiResponse, Promotion, FactPenjualan, GrossProfitResponse, Produk, Snapshot, AccumulativeSnapshot, Store, FactlessResponse, Date} from "@/model/Dimension"
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL
 
@@ -17,6 +17,12 @@ export async function getProduct(): Promise<ApiResponse<Produk[]>> {
 export async function getDate(): Promise<ApiResponse<Date[]>> {
   const res = await fetch(`${API_URL}/dates/`);
   if (!res.ok) throw new Error("Failed to fetch date");
+  return res.json();
+}
+
+export async function getStore(): Promise<ApiResponse<Store[]>> {
+  const res = await fetch(`${API_URL}/stores/`);
+  if (!res.ok) throw new Error("Failed to fetch store");
   return res.json();
 }
 
