@@ -1,4 +1,4 @@
-import { ApiResponse, Promotion, FactPenjualan, GrossProfitResponse, GrossMarginResponse, JumlahStokResponse, Produk, Toko, Snapshot, AccumulativeSnapshot, Date } from "@/model/Dimension"
+import { ApiResponse, Promotion, FactPenjualan, GrossProfitResponse, GrossMarginResponse, JumlahStokResponse, Produk, Snapshot, AccumulativeSnapshot, Store, FactlessResponse, Date } from "@/model/Dimension"
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL
 console.log(API_URL)
@@ -15,7 +15,7 @@ export async function getProduct(): Promise<ApiResponse<Produk[]>> {
   return res.json();
 }
 
-export async function getStore(): Promise<ApiResponse<Toko[]>> {
+export async function getStore(): Promise<ApiResponse<Store[]>> {
   const res = await fetch(`${API_URL}/stores/`);
   if (!res.ok) throw new Error("Failed to fetch product");
   return res.json();
@@ -41,6 +41,12 @@ export async function getSnapshot(): Promise<ApiResponse<Snapshot[]>> {
 export async function getAccumulativeSnapshot(): Promise<ApiResponse<AccumulativeSnapshot[]>> {
   const res = await fetch(`${API_URL}/acc-snapshot/`);
   if (!res.ok) throw new Error("Failed to fetch accumulative snapshot");
+  return res.json();
+}
+
+export async function getFactless(): Promise<FactlessResponse> {
+  const res = await fetch(`${API_URL}/promo-cov/produk-tidak-laku`);
+  if (!res.ok) throw new Error("Failed to fetch not sold product list");
   return res.json();
 }
 

@@ -57,7 +57,7 @@ export interface Produk {
   nama_produk: string;
 }
 
-export interface Toko {
+export interface Store {
   id_toko: string;
   nama_toko: string;
 }
@@ -129,6 +129,20 @@ export interface JumlahStokResponse {
   tanggal_mulai: string;
   tanggal_akhir: string;
   jumlah_stok_per_tanggal: JumlahStokPerTanggal[];
+}
+
+export interface NotSoldProduct {
+  coverage_id: number;
+  tanggal_id: string;
+  id_produk: string; 
+  nama_produk: string;
+  id_toko: string;
+  id_promosi: string | null;
+}
+
+export interface FactlessResponse {
+  count: number;
+  unsold_product: NotSoldProduct[];
 }
 
 export interface ApiResponse<T> {

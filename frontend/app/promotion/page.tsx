@@ -1,13 +1,19 @@
 'use client';
 
-import { Typography, Box, Button, Stack } from "@mui/material";
+import { Typography, Button, Stack } from "@mui/material";
 import { useEffect, useState } from "react";
-import { getPromotions } from "@/api/api";
-import { Promotion } from "@/model/Dimension";
+import { getPromotions, getFactless } from "@/api/api";
+import { Promotion, NotSoldProduct } from "@/model/Dimension";
 import DataTable, { Column } from "@/component/DataTable";
+import DetailModal from "./DetailModal";
 
 export default function PromotionPage() {
   const [promotions, setPromotions] = useState<Promotion[]>([]);
+  const [factless, setFactless] = useState<NotSoldProduct[]>([]);
+  const [selectedPromotion, setSelectedPromotion] = useState<string>();
+  const [open, setOpen] = useState<boolean>(false);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   const columns: Column<Promotion>[] = [
     { id: 'id_promosi', label: 'ID Promosi', minWidth: 100 },
@@ -28,7 +34,7 @@ export default function PromotionPage() {
       render: (row: Promotion) => (
         <Button
           variant="contained"
-          onClick={() => handleDetails(row)}
+          onClick={() => handleOpenModal(row.id_promosi)}
         >
           Details
         </Button>
@@ -38,20 +44,64 @@ export default function PromotionPage() {
 
   useEffect(() => {
     (async () => {
-      const res = await getPromotions();
-      console.log(res.message);
-      console.log(res.count);
-      setPromotions(res.data);
+      try {
+        setLoading(true);
+        setError(null);
+
+        const [promotionsRes, factlessRes] = await Promise.all([
+          getPromotions(),
+          getFactless()
+        ]);
+
+        // Debug the responses
+        console.log('Promotions response:', promotionsRes);
+        console.log('Factless response:', factlessRes);
+
+        // Handle the responses safely
+        if (promotionsRes && promotionsRes.data) {
+          setPromotions(promotionsRes.data);
+        } else {
+          console.warn('Promotions data is undefined');
+          setPromotions([]);
+        }
+
+        if (factlessRes && factlessRes.unsold_product) {
+          setFactless(factlessRes.unsold_product);
+        } else {
+          console.warn('Factless data is undefined, setting empty array');
+          setFactless([]);
+        }
+
+      } catch (err) {
+        console.error('Error fetching data:', err);
+        setError('Gagal memuat data');
+        setPromotions([]);
+        setFactless([]);
+      } finally {
+        setLoading(false);
+      }
     })();
   }, []);
 
-  const handleDetails = (row: Promotion) => {
-    console.log("Detail promosi:", row);
+
+  const handleOpenModal = (row: string) => {
+    setSelectedPromotion(row);
+    setOpen(true)
   };
+
+  const handleCloseModal = () => {
+    setOpen(false);
+  }
+
+  if (loading) {
+    return <Typography>Memuat data...</Typography>;
+  }
+
   return (
     <Stack sx={{ maxWidth: '990px', width: '100%' }} gap={3}>
       <Typography variant="h4" className="mb-10">Promotion</Typography>
       <DataTable columns={columns} rows={promotions} />
+      <DetailModal open={open} handleClose={handleCloseModal} rowId={selectedPromotion} data={factless} />
     </Stack>
   );
 }
