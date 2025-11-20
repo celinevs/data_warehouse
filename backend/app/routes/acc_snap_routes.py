@@ -7,13 +7,16 @@ acc_snap_bp = Blueprint("acc-snapshot", __name__)
 # GET all
 @acc_snap_bp.route('/', methods=['GET'])
 def get_all_acc_snap():
-    items = AccumulatingSnapshotData.query.all()
+    items = AccumulatingSnapshotData.query.order_by(
+        AccumulatingSnapshotData.nomor_penerimaan_barang.asc()
+    ).all()
+
     data = [
         {
             "nomor_penerimaan_barang": res.nomor_penerimaan_barang,
             "key_tanggal_terima": res.key_tanggal_terima, 
             "key_tanggal_inspeksi": res.key_tanggal_inspeksi,
-            "tanggal_penempatan": res.key_tanggal_inspeksi
+            "tanggal_penempatan": res.tanggal_penempatan
         }
         for res in items
     ]
