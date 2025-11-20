@@ -95,6 +95,19 @@ export interface GrossProfitResponse {
   gross_profit_per_toko: GrossProfitPerToko[];
 }
 
+export interface NotSoldProduct {
+  coverage_id: number;
+  tanggal_id: string;
+  id_produk: string; 
+  nama_produk: string;
+  id_toko: string;
+  id_promosi: string | null;
+}
+
+export interface FactlessResponse {
+  count: number;
+  unsold_product: NotSoldProduct[];
+}
 
 export interface ApiResponse<T> {
   message: string;
