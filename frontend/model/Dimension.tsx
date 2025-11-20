@@ -44,9 +44,22 @@ export interface GrossMarginPerToko {
   gross_margin: number;
 }
 
+export interface JumlahStokPerTanggal {
+  tanggal_id: string;
+  tanggal: string;
+  jumlah_stok: number;
+  id_toko: string;
+  nama_toko: string;
+}
+
 export interface Produk {
   id_produk: string;
   nama_produk: string;
+}
+
+export interface Toko {
+  id_toko: string;
+  nama_toko: string;
 }
 
 export interface Date {
@@ -108,6 +121,14 @@ export interface GrossMarginResponse {
   tanggal_mulai: string;
   tanggal_akhir: string;
   gross_margin_per_toko: GrossMarginPerToko[];
+}
+
+export interface JumlahStokResponse {
+  id_produk: string;
+  id_toko: string;
+  tanggal_mulai: string;
+  tanggal_akhir: string;
+  jumlah_stok_per_tanggal: JumlahStokPerTanggal[];
 }
 
 export interface ApiResponse<T> {

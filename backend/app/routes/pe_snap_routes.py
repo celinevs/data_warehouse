@@ -54,42 +54,52 @@ def get_pe_snap_by_produk(produk):
     return jsonify({"message": "OK", "data": [i.json() for i in items]}), 200
 
 # GET stock per date by product by store
-@pe_snap_bp.route('/jumlah-stok/', methods=['GET'])
+@pe_snap_bp.route('/hitung/jumlah-stok', methods=['GET'])
 def get_jumlah_stok():
     id_produk = request.args.get('id_produk')
     id_toko = request.args.get('id_toko')
-    tanggal_mulai = request.args.get('tanggal_mulai')
-    tanggal_akhir = request.args.get('tanggal_akhir')
+    tanggal_mulai = request.args.get('start')
+    tanggal_akhir = request.args.get('end')
 
     # base query
-    query = PeriodicSnapshotData.query
+
+    if not id_produk or not id_toko or not tanggal_mulai or not tanggal_akhir:
+        return jsonify({"error": "Harus ada produk_id, tanggal mulai, dan tanggal akhir"}), 400
+
 
     # filter by produk
-    if id_produk:
-        query = query.filter(PeriodicSnapshotData.id_produk==id_produk)
-    
-    if id_toko:
-        query = query.filter(PeriodicSnapshotData.id_toko==id_toko)
-    
-    if tanggal_mulai and tanggal_akhir:
-        query = query.filter(PeriodicSnapshotData.tanggal_id.between(tanggal_mulai, tanggal_akhir)).order_by(PeriodicSnapshotData.tanggal_id.asc())
-    
-    else:
-        return jsonify({"error": "Parameter id_produk, id_toko, tanggal_mulai, tanggal_akhir wajib"}), 400
-
-    query = query.all()
+    results = (
+        db.session.query(
+            StoreData.id_toko,
+            StoreData.nama_toko,
+            PeriodicSnapshotData.jumlah_stok,
+            PeriodicSnapshotData.tanggal_id,
+            DateData.tanggal
+        )
+        .join(StoreData, PeriodicSnapshotData.id_toko == StoreData.id_toko)
+        .join(DateData, PeriodicSnapshotData.tanggal_id == DateData.tanggal_id)
+        .filter(PeriodicSnapshotData.id_produk == id_produk)
+        .filter(PeriodicSnapshotData.id_toko == id_toko)
+        .filter(PeriodicSnapshotData.tanggal_id.between(tanggal_mulai, tanggal_akhir))
+        .order_by(PeriodicSnapshotData.tanggal_id.asc())
+        .all()
+    )
 
     data = [
         {
             "tanggal_id": r.tanggal_id,
-            "cap_waktu_sql": r.cap_waktu_sql,
-            "jumlah_stok": int(r.jumlah_stok)
+            "tanggal": r.tanggal,
+            "jumlah_stok": int(r.jumlah_stok), 
+            "id_toko": r.id_toko, 
+            "nama_toko": r.nama_toko
         } 
-        for r in query
+
+        for r in results
     ]
 
     return jsonify({
         "id_produk": id_produk, 
+        "id_toko": id_toko,
         "tanggal_mulai": tanggal_mulai, 
         "tanggal_akhir": tanggal_akhir, 
         "jumlah_stok_per_tanggal": data

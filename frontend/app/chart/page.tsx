@@ -3,6 +3,7 @@
 import { Typography, Stack } from "@mui/material";
 import GrossProfitChart from "./GrossProfitChart";
 import GrossMarginChart from "./GrossMarginChart";
+import JumlahStokChart from "./JumlahStokChart";
 
 export default function ChartPage() {
   return (
@@ -10,6 +11,7 @@ export default function ChartPage() {
       <Typography variant="h4">Chart</Typography>
       <GrossProfitChart />
       <GrossMarginChart />
+      <JumlahStokChart />
     </Stack>
   );
 }

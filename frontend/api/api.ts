@@ -1,4 +1,4 @@
-import { ApiResponse, Promotion, FactPenjualan, GrossProfitResponse, GrossMarginResponse, Produk, Snapshot, AccumulativeSnapshot, Date } from "@/model/Dimension"
+import { ApiResponse, Promotion, FactPenjualan, GrossProfitResponse, GrossMarginResponse, JumlahStokResponse, Produk, Toko, Snapshot, AccumulativeSnapshot, Date } from "@/model/Dimension"
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL
 console.log(API_URL)
@@ -11,6 +11,12 @@ export async function getPromotions(): Promise<ApiResponse<Promotion[]>> {
 
 export async function getProduct(): Promise<ApiResponse<Produk[]>> {
   const res = await fetch(`${API_URL}/products/`);
+  if (!res.ok) throw new Error("Failed to fetch product");
+  return res.json();
+}
+
+export async function getStore(): Promise<ApiResponse<Toko[]>> {
+  const res = await fetch(`${API_URL}/stores/`);
   if (!res.ok) throw new Error("Failed to fetch product");
   return res.json();
 }
@@ -69,6 +75,24 @@ export async function getGrossMargin(
   }
 
   const data: GrossMarginResponse = await response.json();
+  return data;
+}
+
+export async function getJumlahStok(
+  id_produk: string,
+  id_toko: string,
+  start: string,
+  end: string
+): Promise<JumlahStokResponse> {
+  const response = await fetch(
+    `${API_URL}/pe-snapshot/hitung/jumlah-stok?id_produk=${id_produk}&id_toko=${id_toko}&start=${start}&end=${end}`
+  );
+
+  if (!response.ok) {
+    throw new Error(`Failed to fetch jumlah stok (${response.status})`);
+  }
+
+  const data: JumlahStokResponse = await response.json();
   return data;
 }
 
