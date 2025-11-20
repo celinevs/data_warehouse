@@ -52,9 +52,9 @@ def get_acc_snap_by_penempatan(tanggal):
 
 
 # PUT update key_tanggal_inspeksi
-@acc_snap_bp.route('/update-key-inspeksi/<string:key_tanggal>', methods=['PUT'])
-def update_tanggal_inspeksi(key_tanggal):
-    item = AccumulatingSnapshotData.query.get(key_tanggal)
+@acc_snap_bp.route('/update-key-inspeksi/<string:nomor_penerimaan>', methods=['PUT'])
+def update_tanggal_inspeksi(nomor_penerimaan):
+    item = AccumulatingSnapshotData.query.get(nomor_penerimaan)
 
     if not item:
         return jsonify({"message": "Not Found"}), 404
@@ -83,9 +83,9 @@ def update_tanggal_inspeksi(key_tanggal):
         return jsonify({"message": "Error", "error": str(e)}), 400
 
 # PUT update tanggal_penempatan
-@acc_snap_bp.route('/update-key-penempatan/<string:key_tanggal>', methods=['PUT'])
-def update_tanggal_penempatan(key_tanggal):
-    item = AccumulatingSnapshotData.query.get(key_tanggal)
+@acc_snap_bp.route('/update-key-penempatan/<string:nomor_penerimaan>', methods=['PUT'])
+def update_tanggal_penempatan(nomor_penerimaan):
+    item = AccumulatingSnapshotData.query.get(nomor_penerimaan)
 
     if not item:
         return jsonify({"message": "Not Found"}), 404
