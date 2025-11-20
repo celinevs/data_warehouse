@@ -14,7 +14,7 @@ class PromotionCoverageFact(db.Model):
     id_promosi = db.Column(String(6), ForeignKey("dim_promosi.id_promosi"), nullable=False)
 
     # indikator promosi -> dummy measure
-    indikator_promosi = db.Column(Integer, nullable=False)
+    promotion_count = db.Column(Integer, nullable=False)
 
     def json(self):
         return {
