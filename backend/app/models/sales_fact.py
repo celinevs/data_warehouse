@@ -13,7 +13,7 @@ class SalesFact(db.Model):
     id_produk = db.Column(String(4), ForeignKey("dim_produk.id_produk"), nullable=False)
     id_toko = db.Column(String(10), ForeignKey("dim_toko.id_toko"), nullable=False)
     id_promosi = db.Column(String(6), ForeignKey("dim_promosi.id_promosi"), nullable=True)
-    id_kasir = db.Column(String(6), ForeignKey("dim_waktu.id_kasir"), nullable=False)
+    id_kasir = db.Column(String(6), ForeignKey("dim_orang_kasir.id_orang_kasir"), nullable=False)
     metode_pembayaran_sk = db.Column(Integer, ForeignKey("dim_metode_pembayaran.metode_pembayaran_sk"), nullable=False)
     nomor_struk = db.Column(String(20), nullable=False)
 
