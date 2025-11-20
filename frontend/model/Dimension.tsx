@@ -39,6 +39,8 @@ export interface GrossProfitPerToko {
 export interface GrossMarginPerToko {
   id_toko: string;
   nama_toko: string;
+  gross_profit: number;
+  revenue: number;
   gross_margin: number;
 }
 

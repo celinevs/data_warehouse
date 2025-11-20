@@ -147,7 +147,8 @@ def get_toko_gross_margin():
             db.func.sum(SalesFact.total_nilai_jual).label("revenue"), 
             db.func.sum(SalesFact.total_nilai_jual - SalesFact.total_nilai_beli).label("gross_profit")
             (
-                (db.func.sum(SalesFact.total_nilai_jual - SalesFact.total_nilai_beli))/(db.func.sum(SalesFact.total_nilai_jual))
+                db.func.sum(SalesFact.total_nilai_jual - SalesFact.total_nilai_beli)/
+                db.func.sum(SalesFact.total_nilai_jual)
             ).label("gross_margin")
         )
         .join(StoreData, SalesFact.id_toko == StoreData.id_toko)
