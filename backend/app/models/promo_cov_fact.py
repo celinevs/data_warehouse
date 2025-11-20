@@ -18,9 +18,10 @@ class PromotionCoverageFact(db.Model):
 
     def json(self):
         return {
+            "coverage_id": self.coverage_id,
             "tanggal_id": self.tanggal_id,
             "id_produk": self.id_produk,
             "id_toko": self.id_toko,
             "id_promosi": self.id_promosi,
-            "indikator_promosi": self.indikator_promosi
+            "indikator_promosi": self.promotion_count
         }
