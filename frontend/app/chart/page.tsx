@@ -1,11 +1,15 @@
+'use client';
+
 import { Typography, Box } from "@mui/material";
-import GrossProfitGraph from "@/component/GrossProfitGraph";
+import GrossProfitChart from "./GrossProfitChart";
+
+type FilterForm = Record<string, any>;
 
 export default function ChartPage() {
   return (
     <Box>
-        <Typography variant="h4">Chart </Typography>
-        <GrossProfitGraph />
+      <Typography variant="h4">Chart</Typography>
+      <GrossProfitChart />
     </Box>
   );
 }

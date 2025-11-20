@@ -128,7 +128,7 @@ export default function Sidebar({ items, children }: SidebarProps) {
     };
 
     return (
-        <Box sx={{ display: "flex" }}>
+        <Box sx={{ display: "flex", width: '100%' }}>
             <AppBar position="fixed" open={open}>
                 <Toolbar>
                     <IconButton
