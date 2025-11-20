@@ -23,7 +23,7 @@ const sidebarItems = [
   { label: "Fact Table", href: "/fact" },
   { label: "Date Table", href: "/date" },
   { label: "Promotions", href: "/promotion" },
-  { label: "Inventory", href: "/inventory" },
+  { label: "Accumulative Snapshot", href: "/inventory" },
   { label: "Snapshot", href: "/snapshot" },
 ];
 
