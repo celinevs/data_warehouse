@@ -8,15 +8,24 @@ acc_snap_bp = Blueprint("acc-snapshot", __name__)
 @acc_snap_bp.route('/', methods=['GET'])
 def get_all_acc_snap():
     items = AccumulatingSnapshotData.query.all()
+    data = [
+        {
+            "nomor_penerimaan_barang": res.nomor_penerimaan_barang,
+            "key_tanggal_terima": res.key_tanggal_terima, 
+            "key_tanggal_inspeksi": res.key_tanggal_inspeksi,
+            "tanggal_penempatan": res.key_tanggal_inspeksi
+        }
+        for res in items
+    ]
     return jsonify({
         "message": "OK",
         "count": len(items),
-        "data": [i.json() for i in items]
+        "data": data
     }), 200
 
 
 # GET by nomor_acc_snap_barang (PK)
-@acc_snap_bp.route('/id/<int:nomor>', methods=['GET'])
+@acc_snap_bp.route('/id/<string:nomor>', methods=['GET'])
 def get_acc_snap_by_id(nomor):
     item = AccumulatingSnapshotData.query.get(nomor)
     if not item:
@@ -52,9 +61,9 @@ def get_acc_snap_by_penempatan(tanggal):
 
 
 # PUT update key_tanggal_inspeksi
-@acc_snap_bp.route('/update-key-inspeksi/<string:key_tanggal>', methods=['PUT'])
-def update_tanggal_inspeksi(key_tanggal):
-    item = AccumulatingSnapshotData.query.get(key_tanggal)
+@acc_snap_bp.route('/update-key-inspeksi/<string:nomor_penerimaan>', methods=['PUT'])
+def update_tanggal_inspeksi(nomor_penerimaan):
+    item = AccumulatingSnapshotData.query.get(nomor_penerimaan)
 
     if not item:
         return jsonify({"message": "Not Found"}), 404
@@ -83,9 +92,9 @@ def update_tanggal_inspeksi(key_tanggal):
         return jsonify({"message": "Error", "error": str(e)}), 400
 
 # PUT update tanggal_penempatan
-@acc_snap_bp.route('/update-key-penempatan/<string:key_tanggal>', methods=['PUT'])
-def update_tanggal_penempatan(key_tanggal):
-    item = AccumulatingSnapshotData.query.get(key_tanggal)
+@acc_snap_bp.route('/update-key-penempatan/<string:nomor_penerimaan>', methods=['PUT'])
+def update_tanggal_penempatan(nomor_penerimaan):
+    item = AccumulatingSnapshotData.query.get(nomor_penerimaan)
 
     if not item:
         return jsonify({"message": "Not Found"}), 404
