@@ -6,14 +6,13 @@ import { getGrossMargin, getProduct } from "@/api/api";
 
 type FilterForm = Record<string, any>;
 
-export default function GrossProfitChart() {
+export default function GrossMarginChart() {
     const [grossProfitData, setGrossMarginData] = useState<GrossMarginPerToko[]>([]);
     const [products, setProducts] = useState<Produk[]>([]);
     const { watch, setValue } = useForm<FilterForm>({
         defaultValues: {
             product: "P001",
-            startDate: "20250101",
-            endDate: "20251231",
+            date: "20251125"
         }
     });
     const filterValues = watch();
@@ -37,15 +36,10 @@ export default function GrossProfitChart() {
             ]
         },
         {
-            key: "startDate",
-            label: "Start Date",
+            key: "date",
+            label: "Date",
             type: "date" as const,
         },
-        {
-            key: "endDate",
-            label: "End Date",
-            type: "date" as const,
-        }
     ];
 
     useEffect(() => {
@@ -59,13 +53,12 @@ export default function GrossProfitChart() {
         (async () => {
             const res = await getGrossMargin(
                 filterValues.product, 
-                filterValues.startDate, 
-                filterValues.endDate
+                filterValues.date, 
             );
             console.log(res)
             setGrossMarginData(res.gross_margin_per_toko);
         })();
-    }, [filterValues.product, filterValues.startDate, filterValues.endDate]);
+    }, [filterValues.product, filterValues.date]);
 
     return (
         <ReusableBarChart
@@ -73,7 +66,7 @@ export default function GrossProfitChart() {
             data={grossProfitData}
             xKey="nama_toko"
             yKey="gross_margin"
-            yLabel="Gross Profit (%)"
+            yLabel="Gross Margin (%)"
             color="#1976d2"
             filters={filterConfig}
             filterValues={filterValues}
