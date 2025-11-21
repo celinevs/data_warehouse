@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import ReusableBarChart from "@/component/ReusableBarChart";
-import { JumlahStokPerTanggal, Produk, Toko } from "@/model/Dimension";
+import { JumlahStokPerTanggal, Produk, Store } from "@/model/Dimension";
 import { useState, useEffect } from "react";
 import { getJumlahStok, getProduct, getStore } from "@/api/api";
 
@@ -9,7 +9,7 @@ type FilterForm = Record<string, any>;
 export default function JumlahStokChart() {
     const [jumlahStokData, setStokData] = useState<JumlahStokPerTanggal[]>([]);
     const [products, setProducts] = useState<Produk[]>([]);
-    const [stores, setStores] = useState<Toko[]>([])
+    const [stores, setStores] = useState<Store[]>([])
     const { watch, setValue } = useForm<FilterForm>({
         defaultValues: {
             product: "P034",
