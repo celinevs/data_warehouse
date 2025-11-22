@@ -31,8 +31,8 @@ services:
       - CLUSTER_NAME=datalake
       - CORE_CONF_fs_defaultFS=hdfs://namenode:8020
     ports:
-      - "9870:9870"
-      - "8020:8020"
+      - "9870:9870" # Web UI NameNode
+      - "8020:8020" # RPC NameNode
     volumes:
       - hadoop_namenode:/hadoop/dfs/name
     networks:
@@ -46,13 +46,13 @@ services:
       - CORE_CONF_fs_defaultFS=hdfs://namenode:8020
       - SERVICE_PRECONDITION=namenode:8020
     ports:
-      - "9864:9864"
+      - "9864:9864" # Web UI DataNode
     volumes:
       - hadoop_datanode:/hadoop/dfs/data
     networks:
       - datawarehouse_net
 
-  # === Hive Metastore DB ===
+  # === Hive Metastore DB (Postgres) ===
   metastore-db:
     image: postgres:11
     container_name: metastore-db
@@ -64,24 +64,44 @@ services:
       - "5432:5432"
     networks:
       - datawarehouse_net
+    volumes:
+      - metastore-data:/var/lib/postgresql/data
+
+  # === Hive Metastore Service ===
+  hive-metastore:
+    image: bde2020/hive:2.3.2-postgresql-metastore
+    container_name: hive-metastore
+    command: /opt/hive/bin/hive #--service metastore
+    environment:
+      - HIVE_SERVICE=metastore
+      - HIVE_METASTORE_DB_TYPE=postgres
+      - HIVE_METASTORE_DB_HOST=metastore-db
+      - HIVE_METASTORE_DB_NAME=metastore
+      - HIVE_METASTORE_DB_USER=hive
+      - HIVE_METASTORE_DB_PASSWORD=hive
+      - CORE_CONF_fs_defaultFS=hdfs://namenode:8020
+      - SERVICE_PRECONDITION=metastore-db:5432 namenode:8020
+    ports:
+      - "9083:9083" # Thrift Metastore
+    depends_on:
+      - metastore-db
+      - namenode
+    networks:
+      - datawarehouse_net
 
   # === Hive Server ===
   hive-server:
     image: bde2020/hive:2.3.2-postgresql-metastore
     container_name: hive-server
+    command: /opt/hive/bin/hiveserver2
     environment:
-      - HIVE_METASTORE_DB_TYPE=postgres
-      - HIVE_METASTORE_HOST=metastore-db
-      - HIVE_METASTORE_PORT=5432
-      - HIVE_METASTORE_DB_NAME=metastore
-      - HIVE_METASTORE_USER=hive
-      - HIVE_METASTORE_PASSWORD=hive
+      - HIVE_METASTORE_URI=thrift://hive-metastore:9083
       - CORE_CONF_fs_defaultFS=hdfs://namenode:8020
-      - SERVICE_PRECONDITION=namenode:8020 datanode:9864 metastore-db:5432
+      - SERVICE_PRECONDITION=namenode:8020 datanode:9864 hive-metastore:9083
     ports:
-      - "10000:10000"
+      - "10000:10000" # JDBC/Beeline
     depends_on:
-      - metastore-db
+      - hive-metastore
       - namenode
       - datanode
     networks:
@@ -90,6 +110,7 @@ services:
 volumes:
   hadoop_namenode:
   hadoop_datanode:
+  metastore-data:
 
 networks:
   datawarehouse_net:
