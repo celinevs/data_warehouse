@@ -1,4 +1,5 @@
 services:
+  # ---------- APP LAYER ----------
   # nextjs service
   # nextapp:
   #   container_name: nextapp
@@ -24,8 +25,11 @@ services:
       - 4000:4000
     environment:
       - DATABASE_URL=postgresql://postgres:IoeXFiAnfzgzRbDSmKcOfECJjqChYzyH@mainline.proxy.rlwy.net:21599/railway
+      - HIVE_HOST=hive-server
+      - HIVE_PORT=10000
     depends_on:
       - db
+      - hive-server
 
   # db service
   db:
@@ -41,5 +45,52 @@ services:
       - pgdata:/var/lib/postgresql/data
       - ./data:/data
 
+  # ---------- HADOOP LAYER ----------
+  namenode:
+    image: bde2020/hadoop-namenode:2.0.0-hadoop3.2.1-java8
+    container_name: namenode
+    environment:
+      - CLUSTER_NAME=datalakecluster
+    ports:
+      - 9870:9870
+      - 9000:9000
+    volumes:
+      - namenode:/hadoop/dfs/name
+
+  datanode:
+    image: bde2020/hadoop-namenode:2.0.0-hadoop3.2.1-java8
+    container_name: datanode
+    environment:
+      - CLUSTER_NAME=datalakecluster
+    ports:
+      - 9864:9864
+    volumes:
+      - namenode:/hadoop/dfs/name
+    depends_on:
+      - namenode
+
+  # ---------- HIVE LAYER ----------
+  hive-metastore:
+    image: bde2020/hive-metastore:2.3.0-postgresql
+    container_name: hive-metastore
+    environment:
+      - HIVE_LOGLEVEL=INFO
+    ports:
+      - 9083:9083
+    depends_on:
+      - namenode
+
+  hive-server:
+    image: bde2020/hive:2.3.2-postgresql-metastore
+    container_name: hive-server
+    environment:
+      - HIVE_METASTORE_URI=thrift://hive-metastore:9083
+    ports:
+      - 10000:10000
+    depends_on:
+      - hive-metastore
+
 volumes:
   pgdata: {}
+  namenode: {}
+  datanode: {}
