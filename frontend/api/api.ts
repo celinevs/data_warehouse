@@ -69,11 +69,10 @@ export async function getGrossProfit(
 
 export async function getGrossMargin(
   id_produk: string,
-  start: string,
-  end: string
+  tanggal_id: string
 ): Promise<GrossMarginResponse> {
   const response = await fetch(
-    `${API_URL}/fact-sales/penjualan-toko/gross-margin?id_produk=${id_produk}&start=${start}&end=${end}`
+    `${API_URL}/fact-sales/penjualan-toko/gross-margin?id_produk=${id_produk}&tanggal_id=${tanggal_id}`
   );
 
   if (!response.ok) {

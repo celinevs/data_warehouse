@@ -133,11 +133,12 @@ def get_toko_gross_profit():
 @faktur_bp.route('/penjualan-toko/gross-margin', methods=['GET'])
 def get_toko_gross_margin():
     id_produk = request.args.get('id_produk')
-    tanggal_mulai = request.args.get('start')
-    tanggal_akhir = request.args.get('end')
+    tanggal_id = request.args.get('tanggal_id')
+    # tanggal_mulai = request.args.get('start')
+    # tanggal_akhir = request.args.get('end')
 
-    if not id_produk or not tanggal_mulai or not tanggal_akhir:
-        return jsonify({"error": "Harus ada produk_id, tanggal mulai, dan tanggal akhir"}), 400
+    if not id_produk or not tanggal_id:
+        return jsonify({"error": "Harus ada produk_id dan tanggal_id"}), 400
 
 
     results = (
@@ -153,7 +154,7 @@ def get_toko_gross_margin():
         )
         .join(StoreData, SalesFact.id_toko == StoreData.id_toko)
         .filter(SalesFact.id_produk == id_produk)
-        .filter(SalesFact.tanggal_id.between(tanggal_mulai, tanggal_akhir))
+        .filter(SalesFact.tanggal_id == tanggal_id)
         .group_by(StoreData.id_toko, StoreData.nama_toko)
         .all()
     )
@@ -171,8 +172,7 @@ def get_toko_gross_margin():
 
     return jsonify({
         "id_produk": id_produk, 
-        "tanggal_mulai": tanggal_mulai, 
-        "tanggal_akhir": tanggal_akhir, 
+        "tanggal_id": tanggal_id,
         "gross_margin_per_toko": data
     }), 200
 
