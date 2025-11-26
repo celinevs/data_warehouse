@@ -40,6 +40,65 @@ services:
     volumes: 
       - pgdata:/var/lib/postgresql/data
       - ./data:/data
+  # Hadoop NameNode
+  namenode:
+    image: bde2020/hadoop-namenode:2.0.0-hadoop3.2.1-java8
+    container_name: namenode
+    restart: always
+    environment:
+      - CLUSTER_NAME=hadoop-cluster
+    ports:
+      - 9870:9870
+      - 8020:8020
+    volumes:
+      - hadoop_namenode:/hadoop/dfs/name
+  
+   # Hadoop DataNode
+  datanode:
+    image: bde2020/hadoop-datanode:2.0.0-hadoop3.2.1-java8
+    container_name: datanode
+    restart: always
+    depends_on:
+      - namenode
+    environment:
+      - CORE_CONF_fs_defaultFS=hdfs://namenode:8020
+      - HDFS_CONF_dfs_datanode_data_dir=file:///hadoop/dfs/data
+    ports:
+      - 9864:9864
+    volumes:
+      - hadoop_datanode:/hadoop/dfs/data
+   # Hive Metastore
+  hive-metastore:
+    image: bde2020/hive:2.3.2-postgresql-metastore
+    container_name: hive-metastore
+    depends_on:
+      - namenode
+      - datanode
+      - db
+    environment:
+      - HIVE_METASTORE_DB_HOST=db
+      - HIVE_METASTORE_DB_NAME=retail_dw
+      - HIVE_METASTORE_DB_USER=admin
+      - HIVE_METASTORE_DB_PASS=admin123
+      - CORE_CONF_fs_defaultFS=hdfs://namenode:8020
+    ports:
+      - 9083:9083
+   # Hive Server2 (for JDBC/Thrift)
+  hive-server:
+    image: bde2020/hive:2.3.2
+    container_name: hive-server
+    depends_on:
+      - hive-metastore
+    environment:
+      - HIVE_METASTORE_URI=thrift://hive-metastore:9083
+      - CORE_CONF_fs_defaultFS=hdfs://namenode:8020
+    ports:
+      - 10000:10000
+      - 10002:10002
+
+
 
 volumes:
   pgdata: {}
+  hadoop_namenode: {}
+  hadoop_datanode: {}
