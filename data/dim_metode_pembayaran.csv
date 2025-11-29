@@ -1,0 +1,10 @@
+metode_pembayaran_sk,metode_pembarayan_bk,nama_metode_pembayaran,jenis_pembayaran,penyedia,apakah_digital
+1,CC-VISA,Kartu Kredit Visa,Kartu Kredit,Visa,TRUE
+2,CC-MC,Kartu Kredit Mastercard,Kartu Kredit,Mastercard,TRUE
+3,BT-BCA,Transfer Bank BCA,Bank Transfer,BCA,TRUE
+4,BT-MANDIRI,Transfer Bank Mandiri,Bank Transfer,Mandiri,TRUE
+5,COD,Cash on Delivery,Tunai,-,FALSE
+6,EW-OVO,OVO,E-Wallet,OVO,TRUE
+7,EW-GOPAY,GoPay,E-Wallet,GoPay,TRUE
+8,EW-DANA,Dana,E-Wallet,Dana,TRUE
+9,EW-SHOPEEPAY,ShopeePay,E-Wallet,ShopeePay,TRUE
